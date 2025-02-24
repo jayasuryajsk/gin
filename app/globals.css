@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 25% 27%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+    --primary: 25 27% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 164 25% 25%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 25% 40%;
+    --accent: 25 27% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 25 27% 65%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 164 25% 25%;
+    --foreground: 0 0% 100%;
+    --card: 164 25% 25%;
+    --card-foreground: 0 0% 100%;
+    --popover: 164 25% 25%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 25 27% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 164 30% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 164 20% 35%;
+    --muted-foreground: 215 25% 80%;
+    --accent: 25 27% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 164 15% 35%;
+    --input: 164 15% 35%;
+    --ring: 25 27% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Add top padding to all pages except home */
+  main:not(.home-page) {
+    @apply pt-16;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-normal text-foreground;
+  }
+
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl font-normal;
+  }
+
+  h2 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-normal;
+  }
+
+  h3 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-normal;
+  }
+
+  p {
+    @apply text-base md:text-lg leading-relaxed text-muted-foreground;
+  }
+}
+
+/* Refined Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/10 hover:bg-primary/20 transition-colors duration-200 rounded-full;
+}
+
+/* Luxury Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Glass Effect */
+.glass {
+  @apply backdrop-blur-md bg-secondary/90 border-white/[0.08];
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/95 to-primary/90;
+}
+
+/* Soft Shadow */
+.shadow-soft {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Hover Effect */
+.hover-lift {
+  @apply transition-transform duration-500 ease-out hover:-translate-y-1;
+}
+
+/* Border Radius */
+.rounded-soft {
+  border-radius: 1rem;
+}
+
+/* Image Treatment */
+.image-treatment {
+  @apply relative overflow-hidden rounded-soft;
+}
+
+.image-treatment::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/10 pointer-events-none opacity-0 transition-opacity duration-500;
+}
+
+.image-treatment:hover::after {
+  @apply opacity-100;
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+::selection {
+  @apply bg-primary text-primary-foreground;
+}
+
+@keyframes click {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cursor-click {
+  animation: click 0.3s ease-in-out;
+}
+
+/* Layout Utilities */
+.content-container {
+  @apply container mx-auto px-4;
+}
+
+/* Card Grid Layouts */
+.recipe-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-2;
+}
+
+.recipe-card {
+  @apply relative p-1 hover-lift;
+}
+
+.recipe-card h3 {
+  @apply text-xs font-medium mb-1;
+}
+
+.recipe-card p {
+  @apply text-xs leading-snug;
+}
+
+.recipe-card .rounded-soft {
+  @apply shadow-soft;
+}
+
+.recipe-card img {
+  @apply p-2;
+}
+
+/* Page Title Container */
+.page-header {
+  @apply mt-16 bg-background border-b;
+}
+
+.page-header .content-container {
+  @apply py-12;
+}
+
+.page-header h1 {
+  @apply text-3xl md:text-4xl font-serif gradient-text mb-4;
+}
+
+.page-header p {
+  @apply text-base text-muted-foreground max-w-2xl;
+}
+
