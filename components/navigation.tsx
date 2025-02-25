@@ -19,7 +19,7 @@ export function Navigation() {
               href="/" 
               className="text-xl font-serif tracking-wide gradient-text hover:opacity-90 transition-opacity duration-300"
             >
-              DGIN
+              BLUE WING GIN
             </Link>
             
             <div className="flex items-center space-x-8">
@@ -37,52 +37,16 @@ export function Navigation() {
                   Home
                 </Link>
                 <Link
-                  href="/products"
+                  href="/products/1"
                   className={`
                     relative py-1 transition-colors duration-300
-                    ${pathname.startsWith("/products")
+                    ${pathname.includes("/products")
                       ? "text-primary after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary"
                       : "text-muted-foreground hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-primary/50 after:transition-all hover:after:w-full"
                     }
                   `}
                 >
                   Shop
-                </Link>
-                <Link
-                  href="/recipes"
-                  className={`
-                    relative py-1 transition-colors duration-300
-                    ${pathname === "/recipes"
-                      ? "text-primary after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary"
-                      : "text-muted-foreground hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-primary/50 after:transition-all hover:after:w-full"
-                    }
-                  `}
-                >
-                  Recipes
-                </Link>
-                <Link
-                  href="/gin-101"
-                  className={`
-                    relative py-1 transition-colors duration-300
-                    ${pathname === "/gin-101"
-                      ? "text-primary after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary"
-                      : "text-muted-foreground hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-primary/50 after:transition-all hover:after:w-full"
-                    }
-                  `}
-                >
-                  Gin 101
-                </Link>
-                <Link
-                  href="/distillery-tour"
-                  className={`
-                    relative py-1 transition-colors duration-300
-                    ${pathname === "/distillery-tour"
-                      ? "text-primary after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:bg-primary"
-                      : "text-muted-foreground hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-primary/50 after:transition-all hover:after:w-full"
-                    }
-                  `}
-                >
-                  Distillery Tour
                 </Link>
                 <Link
                   href="/about"

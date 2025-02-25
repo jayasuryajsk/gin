@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { notFound } from "next/navigation"
+import { notFound, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { gins } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
@@ -9,6 +9,7 @@ import { useCart } from "@/lib/cart-context"
 export default function ProductPage({ params }: { params: { id: string } }) {
   const gin = gins.find((g) => g.id === Number.parseInt(params.id))
   const { addToCart } = useCart()
+  const router = useRouter()
 
   if (!gin) {
     notFound()
@@ -63,12 +64,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </ul>
             </div>
           )}
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">The Story</h2>
-            <p>{gin.story}</p>
-          </div>
-          <Button size="lg" onClick={() => addToCart(gin)}>
-            Add to Cart
+          <Button 
+            size="lg" 
+            onClick={() => {
+              addToCart(gin);
+              router.push('/checkout');
+            }}
+          >
+            Buy Now
           </Button>
         </div>
       </div>
