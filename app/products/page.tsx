@@ -6,14 +6,37 @@ import Link from "next/link"
 import { getProduct } from "@/lib/shopify"
 import ShopifyBuyButton from "@/components/ShopifyBuyButton"
 import { Loading } from "@/components/loading"
-import { getAllProducts } from "@/lib/products"
 import { Button } from "@/components/ui/button"
-import { PageHeader } from "@/components/page-header"
+
+// Local product data instead of using getAllProducts
+const localProducts = [
+  {
+    id: "1",
+    name: "Native Citrus Gin",
+    price: 89.99,
+    image: "/images/native-citrus-gin.jpg",
+    description: "Distilled with native Australian botanicals for a refreshing citrus finish."
+  },
+  {
+    id: "2",
+    name: "Signature Dry Gin",
+    price: 79.99,
+    image: "/images/native-citrus-gin.jpg",
+    description: "Our classic dry gin with a perfect balance of juniper and botanical notes."
+  },
+  {
+    id: "3",
+    name: "Berry Infusion Gin",
+    price: 89.99,
+    image: "/images/native-citrus-gin.jpg",
+    description: "A vibrant gin infused with native Australian berries for a sweet, fruity profile."
+  }
+];
 
 export default function ProductsPage() {
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const products = getAllProducts()
+  const products = localProducts; // Use local data instead of getAllProducts
 
   useEffect(() => {
     async function fetchProduct() {
@@ -50,10 +73,15 @@ export default function ProductsPage() {
 
   return (
     <main className="pt-16">
-      <PageHeader 
-        title="Our Premium Collection" 
-        description="Discover our range of handcrafted gins made with locally sourced botanicals and decades of distilling expertise."
-      />
+      {/* Standard header section instead of PageHeader component */}
+      <div className="bg-background py-10 border-b">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl sm:text-4xl font-serif gradient-text mb-4">Our Premium Collection</h1>
+          <p className="text-muted-foreground max-w-2xl">
+            Discover our range of handcrafted gins made with locally sourced botanicals and decades of distilling expertise.
+          </p>
+        </div>
+      </div>
       
       <section className="py-12">
         <div className="container mx-auto px-4">
