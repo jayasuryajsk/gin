@@ -15,7 +15,26 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.youtube.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 's.ytimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+    ],
   },
+  // Removed CSP headers to ensure YouTube embedding works properly
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,

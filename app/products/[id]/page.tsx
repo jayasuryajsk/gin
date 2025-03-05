@@ -1,81 +1,73 @@
 "use client"
 
 import Image from "next/image"
-import { notFound, useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { gins } from "@/lib/products"
-import { useCart } from "@/lib/cart-context"
+import { useEffect, useState } from "react"
+import { notFound } from "next/navigation"
+import { getProduct } from "@/lib/shopify"
+import ShopifyBuyButton from "@/components/ShopifyBuyButton"
+import { Loading } from "@/components/loading"
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const gin = gins.find((g) => g.id === Number.parseInt(params.id))
-  const { addToCart } = useCart()
-  const router = useRouter()
+  const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!gin) {
-    notFound()
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        // For now, we're using a hardcoded product ID from environment variables
+        // Later you can use: params.id or get all products and find the one needed
+        const productId = process.env.NEXT_PUBLIC_SHOPIFY_PRODUCT_ID || '';
+        const shopifyProduct = await getProduct(productId);
+        setProduct(shopifyProduct);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProduct();
+  }, []);
+
+  if (loading) {
+    return <Loading />;
   }
+
+  if (!product) {
+    return notFound();
+  }
+
+  // Get the first variant's price
+  const price = product.variants[0]?.price || 0;
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid md:grid-cols-2 gap-8">
         <div className="relative aspect-square">
-          <Image src={gin.image || "/placeholder.svg"} alt={gin.name} fill className="object-cover rounded-lg" />
+          <Image 
+            src={product.images[0]?.src || "/placeholder.svg"} 
+            alt={product.title} 
+            fill 
+            className="object-cover rounded-lg" 
+          />
         </div>
         <div>
-          <h1 className="text-3xl font-bold mb-4">{gin.name}</h1>
-          <p className="text-2xl font-semibold mb-4">${gin.price.toFixed(2)}</p>
-          <p className="mb-6">{gin.description}</p>
+          <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
+          <p className="text-2xl font-semibold mb-4">${parseFloat(price).toFixed(2)}</p>
+          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} className="mb-6" />
+          
           <div className="mb-6">
             <h2 className="text-xl font-semibold mb-2">Details</h2>
-            <p>ABV: {gin.abv}%</p>
-            <p>Volume: {gin.volume}ml</p>
+            {/* You can add custom details from product metafields if available */}
           </div>
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Tasting Notes</h2>
-            <ul className="list-disc list-inside">
-              {gin.tastingNotes.map((note, index) => (
-                <li key={index}>{note}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Perfect Pairings</h2>
-            <ul className="list-disc list-inside">
-              {gin.pairings.map((pairing, index) => (
-                <li key={index}>{pairing}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Key Ingredients</h2>
-            <ul className="list-disc list-inside">
-              {gin.ingredients.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
-              ))}
-            </ul>
-          </div>
-          {gin.awards && (
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">Awards</h2>
-              <ul className="list-disc list-inside">
-                {gin.awards.map((award, index) => (
-                  <li key={index}>{award}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <Button 
-            size="lg" 
-            onClick={() => {
-              addToCart(gin);
-              router.push('/checkout');
-            }}
-          >
-            Buy Now
-          </Button>
+          
+          <ShopifyBuyButton 
+            productId={product.id} 
+            buttonText="Add to Cart" 
+          />
         </div>
       </div>
     </div>
-  )
+  );
 }
 

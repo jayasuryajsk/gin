@@ -12,7 +12,7 @@ export function HeroSection() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <Image src="/hero-image.jpg" alt="Premium Craft Gin" fill style={{ objectFit: "cover" }} priority />
-      <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold tracking-wide text-white text-center mb-4">
           Premium Craft Gin
         </h1>

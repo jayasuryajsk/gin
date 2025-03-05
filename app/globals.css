@@ -4,48 +4,48 @@
 
 @layer base {
   :root {
-    --background: 37 47% 83%; /* Light Brown #dccdaa */
-    --foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --card: 37 47% 83%; /* Light Brown #dccdaa */
-    --card-foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --popover: 37 47% 83%; /* Light Brown #dccdaa */
-    --popover-foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --primary: 170 100% 42%; /* Blue #00d4b4 */
+    --background: 0 0% 100%; /* White */
+    --foreground: 222 47% 11%; /* Dark Blue-Gray */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 222 47% 11%; /* Dark Blue-Gray */
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 222 47% 11%; /* Dark Blue-Gray */
+    --primary: 187 100% 42%; /* Blue Wing Turquoise #00c8d6 - Matches bottle */
     --primary-foreground: 0 0% 100%;
-    --secondary: 32 95% 21%; /* Middle Brown #664005 */
+    --secondary: 187 60% 15%; /* Darker complementary blue */
     --secondary-foreground: 0 0% 100%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --accent: 170 100% 42%; /* Blue #00d4b4 */
+    --muted: 187 20% 90%;
+    --muted-foreground: 187 30% 30%; /* Medium Blue */
+    --accent: 187 100% 42%; /* Blue Wing Turquoise #00c8d6 - Matches bottle */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 170 100% 42%; /* Blue #00d4b4 */
+    --border: 187 30% 90%;
+    --input: 187 30% 90%;
+    --ring: 187 100% 42%; /* Blue Wing Turquoise #00c8d6 - Matches bottle */
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 37 47% 83%; /* Light Brown #dccdaa */
-    --foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --card: 37 47% 83%; /* Light Brown #dccdaa */
-    --card-foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --popover: 37 47% 83%; /* Light Brown #dccdaa */
-    --popover-foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --primary: 170 100% 42%; /* Blue #00d4b4 */
+    --background: 187 30% 10%; /* Dark Blue Background */
+    --foreground: 0 0% 100%; /* White */
+    --card: 187 40% 15%; /* Dark Blue Card */
+    --card-foreground: 0 0% 100%;
+    --popover: 187 30% 10%; /* Dark Blue */
+    --popover-foreground: 0 0% 100%;
+    --primary: 187 100% 42%; /* Blue Wing Turquoise #00c8d6 - Matches bottle */
     --primary-foreground: 0 0% 100%;
-    --secondary: 32 95% 21%; /* Middle Brown #664005 */
+    --secondary: 187 40% 15%; /* Darker blue */
     --secondary-foreground: 0 0% 100%;
-    --muted: 164 20% 35%;
-    --muted-foreground: 27 76% 19%; /* Dark Brown #57320b */
-    --accent: 170 100% 42%; /* Blue #00d4b4 */
+    --muted: 187 40% 15%; /* Darker blue */
+    --muted-foreground: 187 20% 80%; /* Light Blue-Gray */
+    --accent: 187 100% 42%; /* Blue Wing Turquoise #00c8d6 - Matches bottle */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 164 15% 35%;
-    --input: 164 15% 35%;
-    --ring: 170 100% 42%; /* Blue #00d4b4 */
+    --border: 187 50% 20%;
+    --input: 187 50% 20%;
+    --ring: 187 100% 42%; /* Blue Wing Turquoise #00c8d6 - Matches bottle */
   }
 }
 
@@ -125,7 +125,7 @@
 
 /* Gradient Text */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/95 to-primary/90;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00c8d6] via-[#00d6e4] to-[#00b8c4];
 }
 
 /* Soft Shadow */
@@ -160,7 +160,7 @@
 .custom-cursor {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--primary);
+  border: 2px solid #00c8d6;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -233,5 +233,76 @@
 
 .page-header p {
   @apply text-base text-muted-foreground max-w-2xl;
+}
+
+.youtube-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: #000; /* Adding black background */
+}
+
+.youtube-container iframe,
+#player-container,
+#player-container iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* Prevents clicking on the video */
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .youtube-container iframe,
+  #player-container,
+  #player-container iframe {
+    /* height more than width */
+    height: 56.25vw; /* 16:9 ratio */
+    width: 100vw;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .youtube-container iframe,
+  #player-container,
+  #player-container iframe {
+    /* width more than height */
+    width: 177.78vh; /* 16:9 ratio */
+    height: 100vh;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .youtube-container {
+    height: 100vh;
+  }
+
+  .recipe-grid {
+    @apply grid-cols-1 sm:grid-cols-2;
+    gap: 1rem;
+  }
+
+  .page-header .content-container {
+    @apply py-6;
+  }
+
+  .page-header h1 {
+    @apply text-2xl;
+  }
+
+  .page-header p {
+    @apply text-sm;
+  }
+  
+  main:not(.home-page) {
+    @apply px-4;
+  }
 }
 

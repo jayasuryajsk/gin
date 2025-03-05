@@ -1,51 +1,43 @@
-import { GinCard } from "@/components/gin-card"
+"use client"
+
 import { AutoSliderBanner } from "@/components/auto-slider-banner"
-import { Button } from "@/components/ui/button"
-import { gins } from "@/lib/products"
+import { BottleShowcase } from "@/components/bottle-showcase"
 import Link from "next/link"
-import Image from "next/image"
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="home-page flex min-h-screen flex-col items-center justify-between">
       <AutoSliderBanner />
-
-      <section id="featured-products" className="w-full py-16 md:py-24 bg-muted">
+      
+      <section className="w-full py-20 bg-gradient-to-b from-background to-muted">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-4xl font-serif font-bold text-center text-foreground">Blue Wing Gin</h2>
-          <div className="flex justify-center">
-            <div className="max-w-md">
-              <GinCard {...gins[0]} />
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <h2 className="text-4xl md:text-5xl font-serif mb-6">Discover Our Premium <span className="gradient-text">Australian Gin</span></h2>
+              <p className="mb-8 text-lg">
+                Crafted with passion by a veteran and a chemical engineer, our Native Citrus Gin 
+                captures the essence of Australia with vibrant flavors and locally sourced botanicals.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link 
+                  href="/products" 
+                  className="px-8 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+                >
+                  Shop Now
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="px-8 py-3 border border-primary text-primary rounded-md hover:bg-primary/10 transition-colors"
+                >
+                  Our Story
+                </Link>
+              </div>
+            </div>
+            
+            <div className="order-1 md:order-2">
+              <BottleShowcase />
             </div>
           </div>
-          <div className="text-center mt-12">
-            <Link href="/products">
-              <Button size="lg" className="text-lg font-medium px-8 py-3">
-                View All Products
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section id="newsletter" className="w-full py-16 md:py-24 bg-muted">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-serif font-bold mb-6 text-foreground">Stay Updated</h2>
-          <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Subscribe to our newsletter for exclusive offers, new product announcements, and gin-spiration.
-          </p>
-          <form className="max-w-md mx-auto">
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-grow px-4 py-2 rounded-lg bg-background text-foreground border border-input"
-              />
-              <Button type="submit" className="text-lg font-medium px-6 py-2">
-                Subscribe
-              </Button>
-            </div>
-          </form>
         </div>
       </section>
     </main>

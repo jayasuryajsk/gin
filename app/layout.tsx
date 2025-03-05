@@ -5,15 +5,15 @@ import { CustomCursor } from "@/components/custom-cursor"
 import { Navigation } from "@/components/navigation"
 import { CartProvider } from "@/lib/cart-context"
 import { Inter, Playfair_Display } from "next/font/google"
-import { OffsetSpacer } from '@/components/OffsetSpacer'
+import { AgeVerification } from '@/components/age-verification'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair-display" })
 
 export const metadata: Metadata = {
-  title: "DGIN - Premium Craft Gin",
-  description: "Discover our collection of premium craft gins",
-    generator: 'v0.dev'
+  title: "Blue Wing Distillery - Premium Australian Gin",
+  description: "Discover our collection of premium handcrafted gins made in Australia",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -27,22 +27,27 @@ export default function RootLayout({
         className={`${inter.variable} ${playfairDisplay.variable} ${inter.className} bg-background text-foreground`}
       >
         <CartProvider>
+          <AgeVerification />
           <Navigation />
-          <OffsetSpacer />
           {children}
-          <footer className="w-full py-12 px-4 bg-secondary">
+          <footer className="w-full py-12 px-4 bg-primary/10">
             <div className="container mx-auto text-center">
-              <p className="text-sm text-secondary-foreground">
-                &copy; 2023 DGIN. All rights reserved. Please drink responsibly.
+              <p className="text-sm text-primary-foreground/80 mb-4">
+                &copy; {new Date().getFullYear()} Blue Wing Distillery. All rights reserved. Please drink responsibly.
               </p>
+              <div className="mb-6">
+                <p className="text-xs text-primary-foreground/70">
+                  Flat rate shipping: $12 (Free for orders over $200)
+                </p>
+              </div>
               <div className="mt-4 space-x-4">
-                <a href="#" className="text-secondary-foreground hover:text-primary transition-colors">
+                <a href="#" className="text-primary hover:text-primary/80 transition-colors">
                   Terms of Service
                 </a>
-                <a href="#" className="text-secondary-foreground hover:text-primary transition-colors">
+                <a href="#" className="text-primary hover:text-primary/80 transition-colors">
                   Privacy Policy
                 </a>
-                <a href="#" className="text-secondary-foreground hover:text-primary transition-colors">
+                <a href="#" className="text-primary hover:text-primary/80 transition-colors">
                   Contact Us
                 </a>
               </div>

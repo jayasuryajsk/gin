@@ -16,6 +16,35 @@ export interface Gin {
 export const gins: Gin[] = [
   {
     id: 1,
+    name: "Blue Wing Native Citrus Gin",
+    price: 98,
+    image: "/images/native-citrus-gin.jpg",
+    description: "A unique and versatile spirit that showcases the distinct flavours of Australian citrus fruits, accompanied by mango, native sage and pepperberry.",
+    abv: 42,
+    volume: 700,
+    tastingNotes: ["Mandarin", "Lemon", "Orange", "Mango", "Sage", "Pepperberry"],
+    pairings: [
+      "Seafood dishes (barramundi, prawns, oysters)",
+      "Poultry with citrus marinades",
+      "Charcuterie and cheeses",
+      "Spicy Thai or Indian cuisine",
+      "Citrus desserts"
+    ],
+    ingredients: [
+      "Juniper berry",
+      "Coriander seed",
+      "Angelica root",
+      "Mandarin",
+      "Lemon wedges",
+      "Orange wedges",
+      "Mango",
+      "Sage",
+      "Pepperberry"
+    ],
+    story: "Our Native Citrus Gin is the flagship product of Blue Wing Distillery, crafted with passion by our founders Matt and Shima. It represents the perfect blend of traditional gin-making techniques with the unique flavors of Australia's native botanicals."
+  },
+  {
+    id: 2,
     name: "DGIN Classic London Dry",
     price: 39.99,
     image: "/images/classic-london-dry.jpg",
@@ -30,7 +59,7 @@ export const gins: Gin[] = [
       "Our Classic London Dry is a tribute to the timeless gin tradition. Crafted with precision and care, it embodies the essence of what a great gin should be.",
   },
   {
-    id: 2,
+    id: 3,
     name: "DGIN Botanical Bliss",
     price: 44.99,
     image: "/images/botanical-bliss.jpg",
@@ -45,7 +74,7 @@ export const gins: Gin[] = [
       "Inspired by the lush gardens of England, Botanical Bliss is a floral symphony in a bottle. Each sip is a journey through a blooming meadow.",
   },
   {
-    id: 3,
+    id: 4,
     name: "DGIN Barrel-Aged Reserve",
     price: 54.99,
     image: "/images/barrel-aged-reserve.jpg",
@@ -60,7 +89,7 @@ export const gins: Gin[] = [
       "Our Barrel-Aged Reserve spends six months in carefully selected oak barrels, resulting in a gin that bridges the gap between traditional gin and aged spirits.",
   },
   {
-    id: 4,
+    id: 5,
     name: "DGIN Limited Edition",
     price: 79.99,
     image: "/images/limited-edition.jpg",
@@ -81,7 +110,7 @@ export const gins: Gin[] = [
       "Each year, our master distiller creates a unique gin that pushes the boundaries of flavor. This limited edition is a collector's item for gin enthusiasts.",
   },
   {
-    id: 5,
+    id: 6,
     name: "DGIN Citrus Splash",
     price: 42.99,
     image: "/images/citrus-splash.jpg",
@@ -96,7 +125,7 @@ export const gins: Gin[] = [
       "Citrus Splash was born from the idea of capturing the essence of a sun-drenched citrus grove. It's summer in a glass, any time of the year.",
   },
   {
-    id: 6,
+    id: 7,
     name: "DGIN Spiced Journey",
     price: 47.99,
     image: "/images/spiced-journey.jpg",
@@ -110,7 +139,7 @@ export const gins: Gin[] = [
       "Spiced Journey is our tribute to the ancient spice routes. Each botanical has been carefully selected to take you on a flavor expedition around the world.",
   },
   {
-    id: 7,
+    id: 8,
     name: "DGIN Navy Strength",
     price: 59.99,
     image: "/images/navy-strength.jpg",
@@ -124,7 +153,7 @@ export const gins: Gin[] = [
       "Our Navy Strength gin pays homage to the seafaring tradition of high-proof spirits. It's a gin that stands up to any mixer and any adventure.",
   },
   {
-    id: 8,
+    id: 9,
     name: "DGIN Old Tom",
     price: 49.99,
     image: "/images/old-tom.jpg",
