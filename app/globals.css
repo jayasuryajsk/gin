@@ -59,13 +59,13 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased min-h-screen;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   /* Add top padding to all pages except home */
   main:not(.home-page) {
-    @apply pt-16;
+    @apply pt-24 min-h-[calc(100vh-4rem)];
   }
 
   h1, h2, h3, h4, h5, h6 {

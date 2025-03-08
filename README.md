@@ -1,59 +1,65 @@
-# Blue Wing Gin Website
+# Blue Wing Distillery Website
 
-This is the official website for Blue Wing Gin, built with Next.js and integrated with Shopify for e-commerce functionality.
+A modern e-commerce website for Blue Wing Distillery built with Next.js and Shopify integration.
 
-## Shopify Integration Setup
+## Features
 
-To complete the Shopify integration, follow these steps:
+- Modern, responsive design
+- Shopify integration for product management and checkout
+- Age verification for alcohol products
+- Product catalog with detailed product pages
+- Shopping cart functionality
+- Secure checkout process
 
-1. **Create a Shopify Account**:
-   - If you don't have one already, sign up for a Shopify account
-   - Create your store
+## Tech Stack
 
-2. **Add Your Product**:
-   - In your Shopify admin, go to Products > Add product
-   - Add your gin product with all details (images, description, price, etc.)
-   - Make note of the product ID (you'll need this later)
+- Next.js 14
+- React
+- TypeScript
+- Tailwind CSS
+- Shopify Buy SDK
+- Shadcn/ui Components
 
-3. **Set Up Storefront API Access**:
-   - In Shopify admin, go to Settings > Apps and sales channels
-   - Click on "Develop apps"
-   - Create a new app (name it "Blue Wing Gin Website")
-   - Once created, go to the app settings
-   - Under "Storefront API", select "Configure"
-   - Enable the following scopes:
-     - read_products
-     - write_checkouts
-   - Save your changes
-   - Copy the "Storefront API access token" that's generated
+## Getting Started
 
-4. **Update Environment Variables**:
-   - In this project, find the `.env.local` file
-   - Update the values with your actual Shopify store information:
-     ```
-     NEXT_PUBLIC_SHOPIFY_DOMAIN=your-store.myshopify.com
-     NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-access-token
-     NEXT_PUBLIC_SHOPIFY_PRODUCT_ID=gid://shopify/Product/your-product-id
-     ```
-   - For the product ID, it should be in the format: `gid://shopify/Product/1234567890`
-   - You can find your product ID by looking at the URL when editing the product in Shopify admin
-
-5. **Test the Integration**:
-   - Start the development server
-   - Check that your product is displaying correctly
-   - Test the "Buy Now" button to ensure it redirects to the Shopify checkout
-   - Complete a test order to verify everything is working
-
-## Development
-
+1. Clone the repository:
 ```bash
-# Install dependencies
-npm install
+git clone [your-repository-url]
+```
 
-# Run the development server
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env.local` file with your Shopify credentials:
+```env
+NEXT_PUBLIC_SHOPIFY_DOMAIN=your-store.myshopify.com
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-token
+NEXT_PUBLIC_SHOPIFY_PRODUCT_ID=your-product-id
+```
+
+4. Run the development server:
+```bash
 npm run dev
 ```
 
-## Deployment
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This website can be deployed to platforms like Vercel, Netlify, or any hosting service that supports Next.js applications. 
+## Project Structure
+
+- `/app` - Next.js app router pages and layouts
+- `/components` - React components
+- `/lib` - Utility functions and shared code
+- `/public` - Static assets
+
+## Contributing
+
+1. Create a feature branch
+2. Commit your changes
+3. Push to the branch
+4. Create a Pull Request
+
+## License
+
+This project is private and confidential. All rights reserved. 

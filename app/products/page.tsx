@@ -6,47 +6,35 @@ import Link from "next/link"
 import { getProduct } from "@/lib/shopify"
 import ShopifyBuyButton from "@/components/ShopifyBuyButton"
 import { Loading } from "@/components/loading"
-import { Button } from "@/components/ui/button"
-
-// Local product data instead of using getAllProducts
-const localProducts = [
-  {
-    id: "1",
-    name: "Native Citrus Gin",
-    price: 89.99,
-    image: "/images/native-citrus-gin.jpg",
-    description: "Distilled with native Australian botanicals for a refreshing citrus finish."
-  },
-  {
-    id: "2",
-    name: "Signature Dry Gin",
-    price: 79.99,
-    image: "/images/native-citrus-gin.jpg",
-    description: "Our classic dry gin with a perfect balance of juniper and botanical notes."
-  },
-  {
-    id: "3",
-    name: "Berry Infusion Gin",
-    price: 89.99,
-    image: "/images/native-citrus-gin.jpg",
-    description: "A vibrant gin infused with native Australian berries for a sweet, fruity profile."
-  }
-];
 
 export default function ProductsPage() {
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const products = localProducts; // Use local data instead of getAllProducts
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProduct() {
       try {
         // Get the single product using the product ID from environment variables
         const productId = process.env.NEXT_PUBLIC_SHOPIFY_PRODUCT_ID || '';
+        
+        if (!productId) {
+          setError('Product ID is missing. Please check your environment variables.');
+          setLoading(false);
+          return;
+        }
+        
         const shopifyProduct = await getProduct(productId);
         setProduct(shopifyProduct);
       } catch (error) {
         console.error("Error fetching product:", error);
+        const errorMessage = error instanceof Error 
+          ? error.message 
+          : (error && typeof error === 'object' && 'message' in error)
+            ? String((error as any).message)
+            : JSON.stringify(error);
+            
+        setError(`Error fetching product: ${errorMessage}`);
       } finally {
         setLoading(false);
       }
@@ -55,64 +43,59 @@ export default function ProductsPage() {
     fetchProduct();
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (!product) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-3xl font-bold mb-8">Our Premium Gin</h1>
-        <p>Product not found. Please check your Shopify configuration.</p>
-      </div>
-    );
-  }
-
-  // Get the first variant's price
-  const price = product.variants[0]?.price || 0;
-
   return (
-    <main className="pt-16">
-      {/* Standard header section instead of PageHeader component */}
-      <div className="bg-background py-10 border-b">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl sm:text-4xl font-serif gradient-text mb-4">Our Premium Collection</h1>
-          <p className="text-muted-foreground max-w-2xl">
-            Discover our range of handcrafted gins made with locally sourced botanicals and decades of distilling expertise.
-          </p>
-        </div>
-      </div>
-      
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <div key={product.id} className="relative group">
-                <div className="relative h-[300px] w-full rounded-lg overflow-hidden mb-4 shadow-soft">
-                  <Image 
-                    src={product.image} 
-                    alt={product.name} 
-                    fill 
-                    className="object-cover transition-transform duration-300 group-hover:scale-105" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    <main className="pt-24">
+      <div className="container mx-auto px-4 py-8">
+        {loading && <div className="text-center py-8"><Loading /></div>}
+        
+        {!loading && error && (
+          <div className="p-4 bg-red-50 border border-red-200 rounded-md mb-8">
+            <h3 className="text-lg font-semibold text-red-700 mb-2">Error</h3>
+            <p className="text-red-600">{error}</p>
+          </div>
+        )}
+        
+        {!loading && !product && !error && (
+          <div className="text-center p-8 bg-muted rounded-md">
+            <p>Product not found. Please check your Shopify configuration.</p>
+          </div>
+        )}
+        
+        {!loading && product && (
+          <div className="max-w-4xl mx-auto bg-card rounded-lg shadow-md overflow-hidden">
+            <div className="md:flex">
+              <div className="md:flex-shrink-0 relative h-80 md:h-auto md:w-1/2">
+                <Image 
+                  src={product.images[0]?.src || "/placeholder.svg"} 
+                  alt={product.title} 
+                  fill 
+                  className="object-cover" 
+                />
+              </div>
+              <div className="p-8 md:w-1/2">
+                <h2 className="text-2xl font-bold mb-4">{product.title}</h2>
+                <p className="text-xl font-semibold mb-4">${parseFloat(product.variants[0]?.price || 0).toFixed(2)} +GST</p>
+                <div 
+                  className="mb-6 prose"
+                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                />
+                
+                <div className="mb-6">
+                  <p className="text-sm text-muted-foreground">Flat rate shipping: $12 (Free for orders over $200)</p>
                 </div>
 
-                <h3 className="text-lg mb-2 font-serif">{product.name}</h3>
-                <p className="text-lg font-medium mb-2">${product.price.toFixed(2)}</p>
-                <p className="text-sm mb-3 text-muted-foreground line-clamp-2">{product.description}</p>
-                
-                <div className="space-x-2">
-                  <Link href={`/products/${product.id}`}>
-                    <Button variant="outline" size="sm">View Details</Button>
-                  </Link>
-                  <Button size="sm">Add to Cart</Button>
+                <div>
+                  <ShopifyBuyButton 
+                    productId={product.id} 
+                    buttonText="Add to Cart" 
+                    product={product}
+                  />
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        )}
+      </div>
     </main>
   );
 }

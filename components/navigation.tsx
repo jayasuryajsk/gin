@@ -21,8 +21,8 @@ export function Navigation() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
-      <div className={`${isHomePage ? 'bg-transparent' : 'bg-background border-b'} transition-all duration-300`}>
+    <div className="fixed top-0 left-0 right-0 z-[100]">
+      <div className={`${isHomePage ? 'bg-transparent' : 'bg-background/95 backdrop-blur-sm border-b'} transition-all duration-300`}>
         <div className="container mx-auto px-4 md:px-8">
           <nav className="flex items-center justify-between h-16">
             <Link 

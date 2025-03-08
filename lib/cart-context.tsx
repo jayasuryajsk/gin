@@ -6,11 +6,12 @@ import type { Gin } from "./products"
 
 interface CartItem extends Gin {
   quantity: number
+  shopifyId?: string
 }
 
 interface CartContextType {
   cart: CartItem[]
-  addToCart: (item: Gin) => void
+  addToCart: (item: Gin & { shopifyId?: string }) => void
   removeFromCart: (itemId: number) => void
   updateQuantity: (itemId: number, quantity: number) => void
   clearCart: () => void
@@ -34,7 +35,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("cart", JSON.stringify(cart))
   }, [cart])
 
-  const addToCart = (item: Gin) => {
+  const addToCart = (item: Gin & { shopifyId?: string }) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((cartItem) => cartItem.id === item.id)
       if (existingItem) {
