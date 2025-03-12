@@ -23,12 +23,12 @@ const recipes = [
     ingredients: [
       "60ml (2 oz) Blue Wing Native Citrus Gin",
       "30ml (1 oz) fresh lime juice",
-      "15ml (1/2 oz) simple syrup",
+      "15ml (1/2 oz) sugar syrup",
       "Ice",
       "Lemon myrtle leaves for garnish"
     ],
     instructions:
-      "Combine the gin with fresh lime juice and simple syrup in a shaker with ice. Shake well and strain into a chilled cocktail glass. Garnish with a twist of lemon myrtle leaves for a fragrant finish.",
+      "Combine the gin with fresh lime juice and sugar syrup in a shaker with ice. Shake well and strain into a chilled cocktail glass. Garnish with a twist of lemon myrtle leaves for a fragrant finish.",
     gin: "Blue Wing Native Citrus Gin",
   },
   {
@@ -54,12 +54,12 @@ const recipes = [
     ingredients: [
       "60ml (2 oz) Blue Wing Native Citrus Gin",
       "22ml (3/4 oz) fresh lemon juice",
-      "15ml (1/2 oz) simple syrup",
+      "15ml (1/2 oz) sugar syrup",
       "Ice",
       "Dehydrated lemon wheel for garnish"
     ],
     instructions: 
-      "Mix the gin, fresh lemon juice, and simple syrup in a shaker with ice. Shake well and strain into an ice-filled rocks glass. Garnish with a dehydrated lemon wheel for an eye-catching presentation.",
+      "Mix the gin, fresh lemon juice, and sugar syrup in a shaker with ice. Shake well and strain into an ice-filled rocks glass. Garnish with a dehydrated lemon wheel for an eye-catching presentation.",
     gin: "Blue Wing Native Citrus Gin",
   },
   {
