@@ -18,6 +18,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         // Later you can use: params.id or get all products and find the one needed
         const productId = process.env.NEXT_PUBLIC_SHOPIFY_PRODUCT_ID || '';
         const shopifyProduct = await getProduct(productId);
+        console.log("Fetched product details:", shopifyProduct);
         setProduct(shopifyProduct);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -28,6 +29,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
     fetchProduct();
   }, []);
+
+  // Helper function to safely parse price
+  const formatPrice = (price: any) => {
+    if (!price) return "0.00";
+    const parsedPrice = Number(price);
+    return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "98.00"; // Fallback to default price if NaN
+  };
 
   if (loading) {
     return <Loading />;
@@ -53,7 +61,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         </div>
         <div>
           <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-          <p className="text-2xl font-semibold mb-4">${parseFloat(price).toFixed(2)}</p>
+          <p className="text-2xl font-semibold mb-4">${formatPrice(price)}</p>
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} className="mb-6" />
           
           <div className="mb-6">
@@ -64,6 +72,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <ShopifyBuyButton 
             productId={product.id} 
             buttonText="Add to Cart" 
+            product={product}
           />
         </div>
       </div>
