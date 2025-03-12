@@ -25,6 +25,7 @@ export default function ProductsPage() {
         }
         
         const shopifyProduct = await getProduct(productId);
+        console.log("Fetched product:", shopifyProduct);
         setProduct(shopifyProduct);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -42,6 +43,13 @@ export default function ProductsPage() {
 
     fetchProduct();
   }, []);
+
+  // Helper function to safely parse price
+  const formatPrice = (price: any) => {
+    if (!price) return "0.00";
+    const parsedPrice = Number(price);
+    return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "98.00"; // Fallback to default price if NaN
+  };
 
   return (
     <main className="pt-24">
@@ -74,7 +82,7 @@ export default function ProductsPage() {
               </div>
               <div className="p-8 md:w-1/2">
                 <h2 className="text-2xl font-bold mb-4">{product.title}</h2>
-                <p className="text-xl font-semibold mb-4">${parseFloat(product.variants[0]?.price || 0).toFixed(2)} +GST</p>
+                <p className="text-xl font-semibold mb-4">${formatPrice(product.variants[0]?.price)} +GST</p>
                 <div 
                   className="mb-6 prose"
                   dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
