@@ -4,7 +4,7 @@ const recipes = [
   {
     id: 1,
     name: "Australian Spritz",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Australian Spritz.jpg",
     ingredients: [
       "60ml (2 oz) Blue Wing Native Citrus Gin",
       "90ml (3 oz) chilled sparkling wine",
@@ -19,7 +19,7 @@ const recipes = [
   {
     id: 2,
     name: "Citrus Gimlet",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Citrus Gimlet.jpg",
     ingredients: [
       "60ml (2 oz) Blue Wing Native Citrus Gin",
       "30ml (1 oz) fresh lime juice",
@@ -34,7 +34,7 @@ const recipes = [
   {
     id: 3,
     name: "Gin Fizz with a Twist",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Gin Fizz with a Twist.jpg",
     ingredients: [
       "60ml (2 oz) Blue Wing Native Citrus Gin",
       "30ml (1 oz) fresh lemon juice",
@@ -50,7 +50,7 @@ const recipes = [
   {
     id: 4,
     name: "Bush Lemon Sour",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Bush Lemon Sour.jpg",
     ingredients: [
       "60ml (2 oz) Blue Wing Native Citrus Gin",
       "22ml (3/4 oz) fresh lemon juice",
@@ -65,7 +65,7 @@ const recipes = [
   {
     id: 5,
     name: "Tropical Citrus Collins",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/Tropical Citrus Collins.jpg",
     ingredients: [
       "45ml (1.5 oz) Blue Wing Native Citrus Gin",
       "30ml (1 oz) fresh lime juice",
@@ -80,45 +80,52 @@ const recipes = [
   },
   {
     id: 6,
-    name: "Native Citrus Negroni",
-    image: "/placeholder.svg?height=400&width=600",
+    name: "Classic Gin and Tonic",
+    image: "/images/Classic Gin and Tonic.jpg",
     ingredients: [
-      "30ml (1 oz) Blue Wing Native Citrus Gin",
-      "30ml (1 oz) sweet vermouth",
-      "30ml (1 oz) Campari",
+      "30ml (1oz) Blue Wing Native Citrus Gin",
+      "90ml (3 oz) Tonic water",
       "Ice",
-      "Lemon myrtle twist for garnish"
+      "Cucumber and Rosemary for garnish"
     ],
     instructions:
-      "In a mixing glass, combine gin, sweet vermouth, and Campari. Stir with ice until chilled and strain into a rocks glass filled with ice. Garnish with a twist of lemon myrtle to enhance the gin's botanical qualities.",
+      "Fill glass with ice, add the gin and stir. Add slice of cucumber and a sprig of rosemary to add a beautiful aroma.",
     gin: "Blue Wing Native Citrus Gin",
   },
 ]
 
 export default function RecipesPage() {
   return (
-    <main className="pt-16">
+    <main className="pt-16 bg-background">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8">Blue Wing Cocktail Recipes</h1>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {recipes.map((recipe) => (
-            <div key={recipe.id} className="bg-card rounded-lg overflow-hidden shadow-lg">
-              <div className="relative aspect-video">
-                <Image src={recipe.image || "/placeholder.svg"} alt={recipe.name} fill className="object-cover" />
+            <div key={recipe.id} className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="relative h-[400px] bg-black">
+                <Image 
+                  src={recipe.image} 
+                  alt={recipe.name} 
+                  fill 
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
+                  quality={100}
+                />
               </div>
-              <div className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{recipe.name}</h2>
-                <p className="text-muted-foreground mb-2">Featuring: {recipe.gin}</p>
-                <h3 className="font-semibold mb-1">Ingredients:</h3>
-                <ul className="list-disc list-inside mb-2">
+              <div className="p-6">
+                <h2 className="text-2xl font-serif mb-2">{recipe.name}</h2>
+                <p className="text-muted-foreground mb-4">Featuring: {recipe.gin}</p>
+                <h3 className="font-semibold mb-2">Ingredients:</h3>
+                <ul className="list-disc list-inside mb-4 space-y-1">
                   {recipe.ingredients.map((ingredient, index) => (
                     <li key={index} className="text-muted-foreground">
                       {ingredient}
                     </li>
                   ))}
                 </ul>
-                <h3 className="font-semibold mb-1">Instructions:</h3>
-                <p className="text-muted-foreground">{recipe.instructions}</p>
+                <h3 className="font-semibold mb-2">Instructions:</h3>
+                <p className="text-muted-foreground leading-relaxed">{recipe.instructions}</p>
               </div>
             </div>
           ))}

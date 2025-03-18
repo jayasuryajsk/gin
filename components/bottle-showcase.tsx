@@ -44,7 +44,7 @@ export function BottleShowcase() {
         {/* Bottle image */}
         <div className="relative z-10 w-full h-full">
           <Image
-            src="/images/native-citrus-gin.jpg"
+            src="/images/Blue Wing Gin.jpg"
             alt="Blue Wing Native Citrus Gin"
             fill
             className="object-contain"
