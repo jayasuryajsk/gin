@@ -110,7 +110,7 @@ export function AutoSliderBanner() {
             Where tradition meets innovation in the heart of Australia
           </p>
           <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-            <Link href="/products">
+            <Link href="/products/native-citrus-gin">
               <Button size="lg" className="bg-[#00c8d6] hover:bg-[#00c8d6]/90 text-white border-none py-2 px-4 text-sm sm:text-base">
                 SHOP NOW
               </Button>

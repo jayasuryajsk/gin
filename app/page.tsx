@@ -20,7 +20,7 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
-                  href="/products" 
+                  href="/products/native-citrus-gin" 
                   className="px-8 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
                 >
                   Shop Now

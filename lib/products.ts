@@ -17,7 +17,7 @@ export const gins: Gin[] = [
   {
     id: 1,
     name: "Blue Wing Native Citrus Gin",
-    price: 98,
+    price: 0,
     image: "/images/native-citrus-gin.jpg",
     description: "A unique and versatile spirit that showcases the distinct flavours of Australian citrus fruits, accompanied by mango, native sage and pepperberry.",
     abv: 42,

@@ -6,6 +6,12 @@ import { useCart } from "@/lib/cart-context"
 import Link from "next/link"
 import type { Gin } from "@/lib/products"
 
+// Helper function to safely format prices
+const formatPrice = (price?: number): string => {
+  if (price === undefined || isNaN(price)) return "0.00"
+  return price.toFixed(2)
+}
+
 interface GinCardProps extends Gin {}
 
 export function GinCard({ id, name, price, image, description, abv, volume, tastingNotes, pairings, ingredients, story }: GinCardProps) {
@@ -38,7 +44,7 @@ export function GinCard({ id, name, price, image, description, abv, volume, tast
               {description}
             </p>
             <p className="text-sm font-light">
-              ${price.toFixed(2)}
+              ${formatPrice(price)}
             </p>
           </div>
         </Link>

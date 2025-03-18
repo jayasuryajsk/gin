@@ -46,9 +46,18 @@ export default function ProductsPage() {
 
   // Helper function to safely parse price
   const formatPrice = (price: any) => {
+    // Handle different price format possibilities
     if (!price) return "0.00";
+    
+    // If price is already an object with amount property (from our updated API)
+    if (typeof price === 'object' && price.amount) {
+      const parsedPrice = Number(price.amount);
+      return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "0.00";
+    }
+    
+    // Handle string or number price
     const parsedPrice = Number(price);
-    return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "98.00"; // Fallback to default price if NaN
+    return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "0.00";
   };
 
   return (
@@ -82,7 +91,13 @@ export default function ProductsPage() {
               </div>
               <div className="p-8 md:w-1/2">
                 <h2 className="text-2xl font-bold mb-4">{product.title}</h2>
-                <p className="text-xl font-semibold mb-4">${formatPrice(product.variants[0]?.price)} +GST</p>
+                <p className="text-xl font-semibold mb-4">
+                  ${formatPrice(
+                    typeof product.variants[0]?.price === 'object' 
+                      ? product.variants[0]?.price.amount 
+                      : product.variants[0]?.price
+                  )} +GST
+                </p>
                 <div 
                   className="mb-6 prose"
                   dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
@@ -92,7 +107,7 @@ export default function ProductsPage() {
                   <p className="text-sm text-muted-foreground">Flat rate shipping: $12 (Free for orders over $200)</p>
                 </div>
 
-                <div>
+                <div className="max-w-xs">
                   <ShopifyBuyButton 
                     productId={product.id} 
                     buttonText="Add to Cart" 

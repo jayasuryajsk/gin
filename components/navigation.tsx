@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { ShoppingCart, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/lib/cart-context"
+import Image from "next/image"
 
 export function Navigation() {
   const pathname = usePathname()
@@ -48,7 +49,7 @@ export function Navigation() {
                   Home
                 </Link>
                 <Link
-                  href="/products"
+                  href="/products/native-citrus-gin"
                   className={`
                     relative py-1 transition-colors duration-300
                     ${pathname.includes("/products")
@@ -148,7 +149,7 @@ export function Navigation() {
                 Home
               </Link>
               <Link
-                href="/products"
+                href="/products/native-citrus-gin"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`relative py-2 transition-colors duration-300 ${pathname.includes("/products") ? "text-primary font-medium" : isHomePage ? "text-white" : "text-foreground"}`}
               >

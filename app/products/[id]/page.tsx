@@ -32,9 +32,18 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   // Helper function to safely parse price
   const formatPrice = (price: any) => {
+    // Handle different price format possibilities
     if (!price) return "0.00";
+    
+    // If price is already an object with amount property (from our updated API)
+    if (typeof price === 'object' && price.amount) {
+      const parsedPrice = Number(price.amount);
+      return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "0.00";
+    }
+    
+    // Handle string or number price
     const parsedPrice = Number(price);
-    return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "98.00"; // Fallback to default price if NaN
+    return !isNaN(parsedPrice) ? parsedPrice.toFixed(2) : "0.00";
   };
 
   if (loading) {
@@ -45,8 +54,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     return notFound();
   }
 
-  // Get the first variant's price
-  const price = product.variants[0]?.price || 0;
+  // Get the first variant's price (handle both formats)
+  const priceData = product.variants[0]?.price || 0;
+  const price = typeof priceData === 'object' ? priceData.amount : priceData;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -61,7 +71,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         </div>
         <div>
           <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-          <p className="text-2xl font-semibold mb-4">${formatPrice(price)}</p>
+          <p className="text-2xl font-semibold mb-4">${formatPrice(price)} +GST</p>
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} className="mb-6" />
           
           <div className="mb-6">
@@ -69,11 +79,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             {/* You can add custom details from product metafields if available */}
           </div>
           
-          <ShopifyBuyButton 
-            productId={product.id} 
-            buttonText="Add to Cart" 
-            product={product}
-          />
+          <div className="max-w-xs">
+            <ShopifyBuyButton 
+              productId={product.id} 
+              buttonText="Add to Cart" 
+              product={product}
+            />
+          </div>
         </div>
       </div>
     </div>
