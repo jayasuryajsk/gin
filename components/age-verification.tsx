@@ -37,7 +37,7 @@ export const AgeVerification = () => {
               I am 18 or older
             </button>
             <a
-              href="https://www.google.com"
+              href="https://drinkwise.org.au/"
               className="px-6 py-2 bg-muted text-muted-foreground font-medium rounded-md hover:bg-muted/80 transition-colors text-center"
             >
               I am under 18
