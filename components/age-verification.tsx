@@ -25,9 +25,6 @@ export const AgeVerification = () => {
       <div className="w-full max-w-md p-6 mx-4 bg-white border border-primary/20 rounded-lg shadow-lg relative overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 z-0"></div>
         <div className="relative z-10">
-          <div className="relative w-32 h-32 mx-auto mb-4">
-            <Image src="/logo.svg" alt="Blue Wing Distillery" fill className="object-contain" />
-          </div>
           <h2 className="text-2xl font-bold text-center mb-4 text-primary">Age Verification</h2>
           <p className="text-center mb-6 text-foreground">
             Welcome to Blue Wing Distillery. To enter this site, please confirm that you are 18 years of age or older.
@@ -47,7 +44,7 @@ export const AgeVerification = () => {
             </a>
           </div>
           <p className="text-xs text-center mt-4 text-muted-foreground">
-            By entering this site, you agree to our Terms and Conditions and Privacy Policy.
+            By entering this site, you agree to our <a href="/terms/Blue Wing T&Cs.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Terms and Conditions</a> and <a href="/terms/Blue Wing Privacy.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Privacy Policy</a>.
           </p>
         </div>
       </div>
