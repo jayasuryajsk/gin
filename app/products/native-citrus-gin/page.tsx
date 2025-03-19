@@ -89,7 +89,7 @@ export default function NativeCitrusGinPage() {
   const price = typeof priceData === 'object' ? priceData.amount : priceData;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-16">
       <div className="max-w-5xl mx-auto">
         <div className="md:flex">
           <div className="md:w-1/2 relative aspect-square mb-8 md:mb-0">
@@ -125,15 +125,6 @@ export default function NativeCitrusGinPage() {
                 buttonText="Add to Cart" 
                 product={product}
               />
-            </div>
-            
-            <div className="border-t border-gray-200 pt-6">
-              <h2 className="text-xl font-semibold mb-4">Perfect for:</h2>
-              <ul className="list-disc list-inside space-y-2">
-                <li>A refreshing gin and tonic</li>
-                <li>A sophisticated cocktail</li>
-                <li>Simply enjoyed neat over ice</li>
-              </ul>
             </div>
           </div>
         </div>

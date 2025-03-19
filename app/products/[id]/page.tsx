@@ -59,7 +59,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const price = typeof priceData === 'object' ? priceData.amount : priceData;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-16">
       <div className="grid md:grid-cols-2 gap-8">
         <div className="relative aspect-square">
           <Image 

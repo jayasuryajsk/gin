@@ -62,7 +62,7 @@ export default function ProductsPage() {
 
   return (
     <main className="pt-24">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-16">
         {loading && <div className="text-center py-8"><Loading /></div>}
         
         {!loading && error && (
