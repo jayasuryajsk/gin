@@ -1,7 +1,6 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import type React from "react"
-import { CustomCursor } from "@/components/custom-cursor"
 import { Navigation } from "@/components/navigation"
 import { CartProvider } from "@/lib/cart-context"
 import { Inter, Playfair_Display } from "next/font/google"
@@ -53,7 +52,6 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
-          <CustomCursor />
         </CartProvider>
       </body>
     </html>
