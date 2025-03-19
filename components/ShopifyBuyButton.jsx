@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { createCheckout } from '@/lib/shopify';
 import { useCart } from '@/lib/cart-context';
 import { ShoppingCart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function ShopifyBuyButton({ productId, buttonText = "Add to Cart", product }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const { addToCart } = useCart();
+  const router = useRouter();
   
   const handleAddToCart = () => {
     if (product) {
@@ -45,13 +47,14 @@ export default function ShopifyBuyButton({ productId, buttonText = "Add to Cart"
           quantity: 1
         });
         
-        // Show added success state briefly
+        // Show added success state briefly and then redirect to cart
         setIsAdded(true);
         setTimeout(() => {
-          setIsAdded(false);
-        }, 2000);
+          router.push('/cart');
+        }, 1000);
       } catch (error) {
         console.error("Error adding to cart:", error);
+        setIsAdded(false);
       } finally {
         setIsLoading(false);
       }
