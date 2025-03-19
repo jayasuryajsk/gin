@@ -5,6 +5,7 @@ import { Navigation } from "@/components/navigation"
 import { CartProvider } from "@/lib/cart-context"
 import { Inter, Playfair_Display } from "next/font/google"
 import { AgeVerification } from '@/components/age-verification'
+import Link from "next/link"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair-display" })
@@ -40,14 +41,33 @@ export default function RootLayout({
                 </p>
               </div>
               <div className="mt-4 space-x-4">
-                <a href="#" className="text-primary font-medium hover:text-primary/80 transition-colors">
+                <a 
+                  href="/terms/Blue Wing T&Cs.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-primary font-medium hover:text-primary/80 transition-colors"
+                >
                   Terms of Service
                 </a>
-                <a href="#" className="text-primary font-medium hover:text-primary/80 transition-colors">
+                <a 
+                  href="/terms/Blue Wing Privacy.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-primary font-medium hover:text-primary/80 transition-colors"
+                >
                   Privacy Policy
                 </a>
-                <a href="#" className="text-primary font-medium hover:text-primary/80 transition-colors">
-                  Contact Us
+                <a 
+                  href="mailto:info@bluewingdistillery.com" 
+                  className="text-primary font-medium hover:text-primary/80 transition-colors"
+                >
+                  Email
+                </a>
+                <a 
+                  href="tel:+61423580576" 
+                  className="text-primary font-medium hover:text-primary/80 transition-colors"
+                >
+                  Call
                 </a>
               </div>
             </div>
