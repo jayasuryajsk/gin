@@ -12,8 +12,30 @@ const playfairDisplay = Playfair_Display({ subsets: ["latin"], variable: "--font
 
 export const metadata: Metadata = {
   title: "Blue Wing Distillery - Premium Australian Gin",
-  description: "Discover our collection of premium handcrafted gins made in Australia",
-  generator: 'v0.dev'
+  description: "Discover our collection of premium handcrafted gins made in Australia. Blue Wing Distillery offers Native Citrus Gin and other unique spirits created by a veteran and chemical engineer using locally sourced botanicals.",
+  generator: 'Next.js',
+  keywords: ['Australian gin', 'Blue Wing Distillery', 'craft gin', 'premium gin', 'native citrus gin', 'handcrafted spirits'],
+  authors: [{ name: 'Blue Wing Distillery' }],
+  openGraph: {
+    title: 'Blue Wing Distillery - Premium Australian Gin',
+    description: 'Discover our collection of premium handcrafted gins made in Australia with locally sourced botanicals.',
+    url: 'https://bluewingdistillery.com',
+    siteName: 'Blue Wing Distillery',
+    locale: 'en_AU',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blue Wing Distillery - Premium Australian Gin',
+    description: 'Discover our collection of premium handcrafted gins made in Australia with locally sourced botanicals.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: 'https://bluewingdistillery.com',
+  },
 }
 
 export default function RootLayout({

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { getProduct } from "@/lib/shopify"
 import ShopifyBuyButton from "@/components/ShopifyBuyButton"
 import { Loading } from "@/components/loading"
+import Script from "next/script"
 
 export default function NativeCitrusGinPage() {
   const [product, setProduct] = useState<any>(null);
@@ -90,6 +91,30 @@ export default function NativeCitrusGinPage() {
 
   return (
     <div className="container mx-auto px-4 py-16">
+      <Script id="product-schema" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": "${product.title || 'Blue Wing Native Citrus Gin'}",
+            "image": "${product.images[0]?.src || '/images/Blue Wing Gin.jpg'}",
+            "description": "Premium Australian craft gin with native citrus flavors, handcrafted by Blue Wing Distillery.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Blue Wing Distillery"
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://bluewingdistillery.com/products/native-citrus-gin",
+              "priceCurrency": "AUD",
+              "price": "${formatPrice(price)}",
+              "priceValidUntil": "${new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]}",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        `}
+      </Script>
+
       <div className="max-w-5xl mx-auto">
         <div className="md:flex">
           <div className="md:w-1/2 relative aspect-square mb-8 md:mb-0">
